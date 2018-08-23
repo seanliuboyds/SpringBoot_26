@@ -28,13 +28,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected  void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/h2-console/**", "/register").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/h2-console/**", "/register", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin()
                 .and()
                 .logout()
                 .logoutRequestMatcher(
@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
-        throws Exception {
+            throws Exception {
         auth
 
                 .userDetailsService(userDetailsServiceBean())
@@ -61,5 +61,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     {
         return new BCryptPasswordEncoder();
     }
+
 
 }
