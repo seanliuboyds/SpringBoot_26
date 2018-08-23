@@ -16,6 +16,13 @@ public class AppRole {
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private Collection<AppUser> appUsers;
 
+    public AppRole(String role) {
+        this.role = role;
+    }
+
+    public AppRole() {
+    }
+
     public long getId() {
         return id;
     }
